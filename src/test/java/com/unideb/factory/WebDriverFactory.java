@@ -9,14 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class WebDriverFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger((WebDriverFactory.class));
 
-    @Value("${headless:false}")
+    @Value("${headless:true}")
     private Boolean headless;
 
     public static WebDriver webDriver;
@@ -25,7 +25,7 @@ public class WebDriverFactory {
         if (webDriver == null) {
             webDriver = setUpChromeDriver();
             webDriver.manage().window().maximize();
-            webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         }
         return webDriver;
     }

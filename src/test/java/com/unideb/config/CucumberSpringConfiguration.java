@@ -6,6 +6,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 @CucumberContextConfiguration
 @ContextConfiguration(classes = TestConfig.class)
-@CucumberOptions(glue = "com.epam.ta.unideb")
+@CucumberOptions(glue = "com.unideb")
 public class CucumberSpringConfiguration {
 }
