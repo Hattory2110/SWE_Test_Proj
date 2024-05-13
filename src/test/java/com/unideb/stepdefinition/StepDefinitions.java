@@ -76,4 +76,21 @@ public class StepDefinitions {
         Assert.assertEquals(count, eventsPage.getCardcountOnPage());
     }
 
+    @And("I type {string} in location search")
+    public void iTypeInLocationSearch(String searchString) {
+        eventsPage.searchForLocation(searchString);
+    }
+
+    @Then("I see {int} label")
+    public void iSeeCountLabel(int count) {
+        Assert.assertEquals(count, eventsPage.getLabelCount());
+    }
+
+    @And("I click the Location filter")
+    public void iClickTheLocationFilter() { eventsPage.clickLocationFilter();}
+
+    @And("I see <count> card in Events")
+    public void iSeeCountCardInEvents(int count) {
+        Assert.assertEquals(count, eventsPage.getCardcountOnPage());
+    }
 }

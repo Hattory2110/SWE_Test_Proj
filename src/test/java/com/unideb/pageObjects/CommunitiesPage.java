@@ -34,5 +34,6 @@ public class CommunitiesPage extends CommonPageObject {
         return card;
     }
 
+
 }
 

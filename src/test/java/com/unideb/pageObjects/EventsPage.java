@@ -15,7 +15,19 @@ public class EventsPage extends CommonPageObject {
 
     @FindBy(css = ".evnt-search-filter .evnt-text-fields")
     private WebElement searchField;
+    @FindBy(css = ".evnt-filter-menu-search-wrapper .evnt-search")
+    private WebElement locationSearchField;
 
+    @FindBy(css = ".evnt-dropdown-filter #filter_location")
+    private WebElement locationFilter;
+    @FindBy(css = "form-check-label group-items")
+    private WebElement locationFieldLabel;
+
+    @FindBy(css = ".evnt-filter-item")
+    private WebElement label;
+
+    @FindBy(css = ".evnt-filter-menu-scroll .evnt-filter-menu-items-wrapper")
+    private List<WebElement> labels;
     @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-card-wrapper")
     private WebElement card;
 
@@ -26,12 +38,22 @@ public class EventsPage extends CommonPageObject {
         searchField.sendKeys(searchTerm);
     }
 
+    public void searchForLocation(String searchTerm) { locationSearchField.sendKeys(searchTerm);}
+
     public int getCardcountOnPage() {
         return cards.size();
     }
 
     public WebElement getCard() {
         return card;
+    }
+
+    public WebElement getLabel() {return label;}
+
+    public int getLabelCount() {return labels.size();}
+
+    public void clickLocationFilter() {
+        locationFilter.click();
     }
 
 }

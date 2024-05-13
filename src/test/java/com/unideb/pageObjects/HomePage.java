@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class HomePage extends CommonPageObject {
     private static final String HOME_PAGE_URL = "https://wearecommunity.io/";
 
-    //szelektort adunk meg, amivel megfogjuk az elementet
     @FindBy(className = "communities-icon")
     private WebElement communitiesButton;
 

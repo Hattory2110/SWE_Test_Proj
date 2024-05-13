@@ -13,10 +13,10 @@ import java.time.Duration;
 import java.util.Objects;
 
 @Component
-public class WebDriverFactory {
+public class  WebDriverFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger((WebDriverFactory.class));
 
-    @Value("${headless:true}")
+    @Value("${headless:false}")
     private Boolean headless;
 
     public static WebDriver webDriver;
