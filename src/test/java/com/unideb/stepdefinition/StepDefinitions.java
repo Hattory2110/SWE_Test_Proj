@@ -4,6 +4,7 @@ import com.unideb.factory.WebDriverFactory;
 import com.unideb.pageObjects.CommunitiesPage;
 import com.unideb.pageObjects.EventsPage;
 import com.unideb.pageObjects.HomePage;
+import com.unideb.pageObjects.SpeakersPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -22,6 +23,8 @@ public class StepDefinitions {
 
     @Autowired
     private HomePage homePage;
+    @Autowired
+    private SpeakersPage speakersPage;
 
     @Autowired
     private CommunitiesPage communitiesPage;
@@ -92,5 +95,31 @@ public class StepDefinitions {
     @And("I see {int} card in Events")
     public void iSeeCountCardInEvents(int count) {
         Assert.assertEquals(count, eventsPage.getCardcountOnPage());
+    }
+
+    @Given("the speakers portal is opened")
+    public void theSpeakersPortalIsOpened() {
+        webDriverFactory.getInstance().get("https://wearecommunity.io/speakers");
+    }
+
+    @When("I click the speakers search bar")
+    public void iClickTheSpeakersSearchBar() {
+        speakersPage.clickSpeakerSearchBar();
+    }
+
+    @And("I type {string} in speakers search")
+    public void iTypeInSpeakersSearch(String str) {
+        speakersPage.searchFor(str);
+    }
+
+    @Then("I see {int} speaker cards")
+    public void iSeeCountSpeakerCards(int count) {
+            Assert.assertEquals(count, speakersPage.getCardcountOnPage());
+    }
+
+    @Then("I see the {string} card on Speakers Page")
+    public void iSeeTheCardOnSpeakersPage(String title) {
+        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
+                .until(ExpectedConditions.textToBePresentInElement(speakersPage.getCard(), title));
     }
 }
