@@ -17,10 +17,20 @@ import static com.unideb.factory.WebDriverFactory.webDriver;
 public class SpeakersPage extends CommonPageObject {
     private static final String SPEAKERS_PAGE_URL = "https://wearecommunity.io/speakers";
 
+    @FindBy(css = "#filter_tag")
+    private WebElement tagsButton;
+    @FindBy(css = ".evnt-filter-menu-search-wrapper > input")
+    private WebElement tagSearch;
+
+    public WebElement getLabel() {
+        return label;
+    }
+
+    @FindBy(css = ".evnt-filter-menu-items-wrapper .form-check-label")
+    private WebElement label;
+
     @FindBy(css = ".evnt-search-filter > input")
     private WebElement speakerSearchBar;
-    @FindBy(css = ".form-check-label")
-    private List<WebElement> labels;
     @FindBy(css = ".evnt-users-row > .evnt-users-column")
     private List<WebElement> cards;
     @FindBy(css = ".evnt-user-card .evnt-user-name")
@@ -33,8 +43,17 @@ public class SpeakersPage extends CommonPageObject {
     public void clickSpeakerSearchBar() {
         speakerSearchBar.click();
     }
+    public void clickTagsButton() {
+        tagsButton.click();
+    }
+    public void clickTagsSearchBar() {
+        tagSearch.click();
+    }
     public void searchFor(String searchTerm) {
         speakerSearchBar.sendKeys(searchTerm + "\n");
+    }
+    public void searchForTag(String searchTerm) {
+        tagSearch.sendKeys(searchTerm + "\n");
     }
 
 

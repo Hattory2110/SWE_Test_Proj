@@ -122,4 +122,25 @@ public class StepDefinitions {
         new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
                 .until(ExpectedConditions.textToBePresentInElement(speakersPage.getCard(), title));
     }
+
+    @When("I click the tags search Button")
+    public void iClickTheTagsSearchButton() {
+        speakersPage.clickTagsButton();
+    }
+
+    @Then("I click into the tags search Bar")
+    public void iClickIntoTheTagsSearchBar() {
+        speakersPage.clickTagsSearchBar();
+    }
+
+    @And("I type {string} in tags search")
+    public void iTypeInTagsSearch(String str) {
+        speakersPage.searchForTag(str);
+    }
+
+    @Then("I see the {string} label on Speakers Page")
+    public void iSeeTheLabelOnSpeakersPage(String str) {
+        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
+                .until(ExpectedConditions.textToBePresentInElement(speakersPage.getLabel(), str));
+    }
 }
