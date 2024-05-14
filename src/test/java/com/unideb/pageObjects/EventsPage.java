@@ -15,18 +15,20 @@ public class EventsPage extends CommonPageObject {
 
     @FindBy(css = ".evnt-search-filter .evnt-text-fields")
     private WebElement searchField;
-    @FindBy(css = ".evnt-filter-menu-search-wrapper .evnt-search")
+    @FindBy(css = ".evnt-filters-heading-cell:nth-child(3) .evnt-dropdown-filter.show .evnt-filter-menu .evnt-filter-menu-search-wrapper .evnt-text-fields")
     private WebElement locationSearchField;
 
     @FindBy(css = ".evnt-dropdown-filter #filter_location")
     private WebElement locationFilter;
-    @FindBy(css = "form-check-label group-items")
-    private WebElement locationFieldLabel;
+
+//    @FindBy(css = "form-check-label group-items")
+//    private WebElement locationFieldLabel;
 
     @FindBy(css = ".evnt-filter-item")
     private WebElement label;
 
-    @FindBy(css = ".evnt-filter-menu-scroll .evnt-filter-menu-items-wrapper")
+
+    @FindBy(css = ".evnt-filters-heading-cell:nth-child(3) .evnt-dropdown-filter.show .evnt-filter-menu .evnt-filter-menu-scroll .evnt-filter-menu-items-wrapper")
     private List<WebElement> labels;
     @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-card-wrapper")
     private WebElement card;
@@ -50,7 +52,10 @@ public class EventsPage extends CommonPageObject {
 
     public WebElement getLabel() {return label;}
 
-    public int getLabelCount() {return labels.size();}
+    public int getLabelCount() {
+        return labels.size();
+    }
+
 
     public void clickLocationFilter() {
         locationFilter.click();

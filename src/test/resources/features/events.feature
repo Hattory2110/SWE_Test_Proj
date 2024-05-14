@@ -9,8 +9,10 @@ Feature: Events page
     And I see <count> card in Events
     Examples:
       | search-term     | card-title                                                   | count |
-      | Latvian Speak   | Latvian Speaking club May 2024                               | 1     |
+      | La              | Polish Conversation Club in Wroclaw (offline meetings)       | 12    |
       | Italian         | Italian Speaking Event - May 2024                            | 1     |
+      | Latvian         | Latvian Speaking club May 2024                               | 1     |
+
 
 
     Scenario Outline: Location field labels
@@ -21,4 +23,6 @@ Feature: Events page
       Then I see <count> label
       Examples:
         | search-location   | count |
-        | hungary           | 1     |
+        | ger               | 2     |
+        | un                | 5     |
+        | hu                | 2     |

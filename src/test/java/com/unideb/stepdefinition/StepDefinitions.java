@@ -89,7 +89,7 @@ public class StepDefinitions {
     @And("I click the Location filter")
     public void iClickTheLocationFilter() { eventsPage.clickLocationFilter();}
 
-    @And("I see <count> card in Events")
+    @And("I see {int} card in Events")
     public void iSeeCountCardInEvents(int count) {
         Assert.assertEquals(count, eventsPage.getCardcountOnPage());
     }
