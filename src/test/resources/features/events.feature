@@ -52,3 +52,15 @@ Feature: Events page
     Examples:
       |   name      | card_num |  label_num |  type    |
       |  Nikanchuk  | 1        |  1         |  Speaker |
+
+  Scenario Outline: Search for events with event format filter
+    Given the events page opened
+    When I click on More Filters
+    And I click on Event format
+    And I select "<filter_name>" filter
+    Then I see <card_num> card on Events
+    Examples:
+      |       filter_name      | card_num |
+      | Online only            |    68    |
+      | Offline with streaming |    4     |
+      | Offline only           |    18    |

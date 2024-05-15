@@ -1,11 +1,9 @@
 package com.unideb.stepdefinition;
 
 import com.unideb.factory.WebDriverFactory;
-import com.unideb.pageObjects.CommunitiesPage;
 import com.unideb.pageObjects.EventsPage;
 import com.unideb.pageObjects.HomePage;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -35,7 +33,7 @@ public class Stepdefinitions_events {
     @Then("I see the {string} card on Events Page")
     public void iSeeTheCardEvents(String title) {
         new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
-                .until(ExpectedConditions.textToBePresentInElement(eventsPage.getCard(), title));
+                .until(ExpectedConditions.textToBePresentInElement(eventsPage.getEvent_Card(), title));
     }
 
     @Then("I see {int} card on Events")
@@ -90,5 +88,15 @@ public class Stepdefinitions_events {
         new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(eventsPage.getFilterSearchBar()));
         eventsPage.clickSpeakerFilter();
+    }
+
+    @And("I click on Event format")
+    public void iClickOnEventFormat() {
+        eventsPage.clickEventFormatFilter();
+    }
+
+    @And("I select {string} filter")
+    public void iSelectFilter(String type) {
+        eventsPage.selectEventFormatCheckbox(type);
     }
 }
