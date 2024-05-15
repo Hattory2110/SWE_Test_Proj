@@ -22,26 +22,29 @@ public class EventsPage extends CommonPageObject {
     @FindBy(css = ".evnt-filter-item")
     private WebElement label;
 
-    @FindBy(css = ".evnt-platform-header a[href].nav-link")
-    private List<WebElement> navigationElements;
-//    private Map<String, WebElement> navigationMap = new HashMap<String, WebElement>() {{
-//        List<String> navigationKeys = Arrays.asList(new String[]{"Communities", "Events", "Calendar", "Videos", "Speakers", "Articles"});
-//        for (int index=0; index < navigationKeys.size(); index++) {
-//                navigationMap.put(navigationKeys.get(index), navigationElements.get(index));
-//            }
-//        }
-//    };
-//    private Map<String, String> URL = new HashMap<String, String>() {
-//        {
-//            List<String> navigationKeys = Arrays.asList(new String[]{"Communities", "Events", "Calendar", "Videos", "Speakers", "Articles"});
-//            URL.put(navigationKeys.get(0) ,"https://wearecommunity.io/communities");
-//            URL.put(navigationKeys.get(1) ,"https://wearecommunity.io/events");
-//            URL.put(navigationKeys.get(2) ,"https://wearecommunity.io/calendar");
-//            URL.put(navigationKeys.get(3) ,"https://wearecommunity.io/videos");
-//            URL.put(navigationKeys.get(4) ,"https://wearecommunity.io/speakers");
-//            URL.put(navigationKeys.get(5) ,"https://wearecommunity.io/articles");
-//        }
-//    };
+    @FindBy(css = ".evnt-logo")
+    private WebElement mainPage;
+
+    @FindBy(css = ".communities-icon")
+    private WebElement communitiesButton;
+
+    @FindBy(css = ".events-icon")
+    private WebElement eventsButton;
+
+    @FindBy(css = ".calendar-icon")
+    private WebElement calendarButton;
+
+    @FindBy(css = ".talks-library-icon")
+    private WebElement videosButton;
+
+    @FindBy(css = ".speakers-icon")
+    private WebElement speakersButton;
+
+    @FindBy(css = ".articles-icon")
+    private WebElement articlesButton;
+
+    @FindBy(css = ".login")
+    private WebElement loginButton;
 
     @FindBy(css = ".evnt-dropdown-filter.show .form-check label")
     private List<WebElement> labels;
@@ -72,11 +75,6 @@ public class EventsPage extends CommonPageObject {
         return labels.size();
     }
 
-//    public WebElement getNavigationElement(String name) {
-//        return navigationMap.get(name);
-//    }
-
-
     public void clickLocationFilter() {
         locationFilter.click();
     }
@@ -86,13 +84,46 @@ public class EventsPage extends CommonPageObject {
             checkbox.click();
         }
     }
+    private String expectedURL;
+    public void clickNavigationPage(String key) {
+        switch (key) {
+            case "Main_page":
+                mainPage.click();
+                expectedURL = "https://wearecommunity.io/";
+                break;
+            case "Communities":
+                communitiesButton.click();
+                expectedURL = "https://wearecommunity.io/communities";
+                break;
+            case "Events":
+                eventsButton.click();
+                expectedURL = "https://wearecommunity.io/events";
+                break;
+            case "Calendar":
+                calendarButton.click();
+                expectedURL = "https://wearecommunity.io/calendar";
+                break;
+            case "Videos":
+                videosButton.click();
+                expectedURL = "https://wearecommunity.io/videos";
+                break;
+            case "Speakers":
+                speakersButton.click();
+                expectedURL = "https://wearecommunity.io/speakers";
+                break;
+            case "Articles":
+                articlesButton.click();
+                expectedURL = "https://wearecommunity.io/articles";
+                break;
+            case "Login":
+                loginButton.click();
+                expectedURL = "https://wearecommunity.io/login?return_url=%2Fevents";
+                break;
+        }
+    }
 
-//    public void clickNavigationPage(String key) {
-//        navigationMap.get(key).click();
-//    }
-
-//    public String getNavigationPageURL(String key) {
-//        return URL.get(key);
-//    }
+    public String getNavigationPageURL(String key) {
+        return expectedURL;
+    }
 }
 

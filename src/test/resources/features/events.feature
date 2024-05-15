@@ -28,15 +28,15 @@ Feature: Events page
 #        | kingdom           | 12         | 2     |
         | hu                | 2         | 10    |
 
-#    Scenario Outline: Navigation bar functionalities
-#      Given the events page opened
-#      When I click on "<page>" navigation
-#      Then the required "<page>" opens
-#      Examples:
-#        |     page      |
-#        | Communities   |
-#        | Events        |
-#        | Calendar      |
-#        | Videos        |
-#        | Speakers      |
-#        | Articles      |
+    Scenario Outline: Navigation bar functionalities
+      Given the events page opened
+      When I click on "<page>" navigation
+      Then the required "<page>" opens
+      Examples:
+        |     page      |
+        | Communities   |
+        | Events        |
+        | Calendar      |
+        | Videos        |
+        | Speakers      |
+        | Articles      |
