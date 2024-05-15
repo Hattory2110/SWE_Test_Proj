@@ -24,9 +24,9 @@ Feature: Events page
       And I see <count> label
       Examples:
         | search-location   | card_count | count |
-#        | ger               | 4         | 6     |
-#        | kingdom           | 12         | 2     |
-        | hu                | 2         | 10    |
+        | ger               | 4          | 6     |
+        | kingdom           | 5          | 2     |
+        | hu                | 2          | 10    |
 
     Scenario Outline: Navigation bar functionalities
       Given the events page opened

@@ -54,7 +54,7 @@ public class EventsPage extends CommonPageObject {
     @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-card-wrapper")
     private WebElement card;
 
-    @FindBy(css = ".evnt-events-row .evnt-events-column")
+    @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-event-card")
     private List<WebElement> cards;
 
     public void searchFor(String searchTerm) {
