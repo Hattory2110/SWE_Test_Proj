@@ -70,37 +70,6 @@ public class StepDefinitions {
         Assert.assertEquals(count, communitiesPage.getCardcountOnPage());
     }
 
-    @And("I type {string} in search on Events Page")
-    public void iTypeInSearchEvents(String searchString) {
-        eventsPage.searchFor(searchString);
-    }
-    @Then("I see the {string} card on Events Page")
-    public void iSeeTheCardEvents(String title) {
-        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
-                .until(ExpectedConditions.textToBePresentInElement(eventsPage.getCard(), title));
-    }
-
-    @Then("I see {int} card on Events")
-    public void iSeeCard_countCardOnEvents(int count) {
-        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
-                .until(ExpectedConditions.numberOfElementsToBe(By.ByCssSelector.cssSelector(".evnt-events-row .evnt-events-column"), count));
-        Assert.assertEquals(count, eventsPage.getCardcountOnPage());
-    }
-
-    @And("I click the Location filter")
-    public void iClickTheLocationFilter() { eventsPage.clickLocationFilter();}
-
-
-    @When("I click on {string} navigation")
-    public void iClickOnNavigation(String pageName) {
-        eventsPage.clickNavigationPage(pageName);
-    }
-
-    @Then("the required {string} opens")
-    public void theRequiredOpens(String pageName) {
-        Assert.assertTrue(webDriverFactory.getInstance().getPageSource().contains(eventsPage.getNavigationPageURL(pageName)));
-    }
-
     @Given("the speakers portal is opened")
     public void theSpeakersPortalIsOpened() {
         webDriverFactory.getInstance().get("https://wearecommunity.io/speakers");

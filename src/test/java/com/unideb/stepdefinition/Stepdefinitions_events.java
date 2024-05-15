@@ -26,46 +26,7 @@ public class Stepdefinitions_events {
     private HomePage homePage;
 
     @Autowired
-    private CommunitiesPage communitiesPage;
-
-    @Autowired
     private EventsPage eventsPage;
-
-    @Given("the communities portal is opened")
-    public void communitiesPortalOpened() {
-        webDriverFactory.getInstance().get("https://wearecommunity.io/");
-    }
-
-    @Given("the events page opened")
-    public void theEventsPageOpened() {
-        webDriverFactory.getInstance().get("https://wearecommunity.io/events");
-    }
-
-    @When("I click the communities button")
-    public void iClickTheCommunitiesButton() {
-        homePage.clickCommunities();
-    }
-
-    @When("I click the events button")
-    public void iClickTheEventsButton() {
-        homePage.clickEvents();
-    }
-
-    @And("I type {string} in search")
-    public void iTypeInSearch(String searchString) {
-        communitiesPage.searchFor(searchString);
-    } ///Communities
-
-    @Then("I see the {string} card")
-    public void iSeeTheCard(String title) {
-        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
-                .until(ExpectedConditions.textToBePresentInElement(communitiesPage.getCard(), title));
-    }
-
-    @And("I see {int} card")
-    public void iSeeCard(int count) {
-        Assert.assertEquals(count, communitiesPage.getCardcountOnPage());
-    } //Communities
 
     @And("I type {string} in search on Events Page")
     public void iTypeInSearchEvents(String searchString) {
