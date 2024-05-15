@@ -34,6 +34,11 @@ public class StepDefinitions {
         webDriverFactory.getInstance().get("https://wearecommunity.io/");
     }
 
+    @Given("the events page opened")
+    public void theEventsPageOpened() {
+        webDriverFactory.getInstance().get("https://wearecommunity.io/events");
+    }
+
     @When("I click the communities button")
     public void iClickTheCommunitiesButton() {
         homePage.clickCommunities();
@@ -71,8 +76,10 @@ public class StepDefinitions {
                 .until(ExpectedConditions.textToBePresentInElement(eventsPage.getCard(), title));
     }
 
-    @And("I see {int} card on Events Page")
-    public void iSeeCardEvents(int count) {
+
+    @Then("I see {int} card on Events")
+    public void iSeeCard_countCardOnEvents(int count) {
+        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10), Duration.ofSeconds(10));
         Assert.assertEquals(count, eventsPage.getCardcountOnPage());
     }
 
@@ -81,7 +88,7 @@ public class StepDefinitions {
         eventsPage.searchForLocation(searchString);
     }
 
-    @Then("I see {int} label")
+    @And("I see {int} label")
     public void iSeeCountLabel(int count) {
         Assert.assertEquals(count, eventsPage.getLabelCount());
     }
@@ -89,8 +96,18 @@ public class StepDefinitions {
     @And("I click the Location filter")
     public void iClickTheLocationFilter() { eventsPage.clickLocationFilter();}
 
-    @And("I see {int} card in Events")
-    public void iSeeCountCardInEvents(int count) {
-        Assert.assertEquals(count, eventsPage.getCardcountOnPage());
+    @Then("I select each filter")
+    public void iSelectEachFilter() {
+        eventsPage.checkEachBox();
     }
+
+//    @When("I click on {string} navigation")
+//    public void iClickOnNavigation(String pageName) {
+//        eventsPage.clickNavigationPage(pageName);
+//    }
+
+//    @Then("the required {string} opens")
+//    public void theRequiredOpens(String pageName) {
+//        Assert.assertEquals(webDriverFactory.getInstance().getPageSource(), eventsPage.getNavigationPageURL(pageName));
+//    }
 }
