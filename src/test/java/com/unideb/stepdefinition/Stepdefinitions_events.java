@@ -4,7 +4,6 @@ import com.unideb.factory.WebDriverFactory;
 import com.unideb.pageObjects.CommunitiesPage;
 import com.unideb.pageObjects.EventsPage;
 import com.unideb.pageObjects.HomePage;
-import com.unideb.pageObjects.SpeakersPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,17 +15,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Duration;
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-public class StepDefinitions {
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+public class Stepdefinitions_events {
 
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     @Autowired
     private HomePage homePage;
-    @Autowired
-    private SpeakersPage speakersPage;
 
     @Autowired
     private CommunitiesPage communitiesPage;
@@ -57,7 +54,7 @@ public class StepDefinitions {
     @And("I type {string} in search")
     public void iTypeInSearch(String searchString) {
         communitiesPage.searchFor(searchString);
-    }
+    } ///Communities
 
     @Then("I see the {string} card")
     public void iSeeTheCard(String title) {
@@ -68,7 +65,7 @@ public class StepDefinitions {
     @And("I see {int} card")
     public void iSeeCard(int count) {
         Assert.assertEquals(count, communitiesPage.getCardcountOnPage());
-    }
+    } //Communities
 
     @And("I type {string} in search on Events Page")
     public void iTypeInSearchEvents(String searchString) {
@@ -87,9 +84,25 @@ public class StepDefinitions {
         Assert.assertEquals(count, eventsPage.getCardcountOnPage());
     }
 
+    @And("I type {string} in filter search")
+    public void iTypeInLocationSearch(String searchString) {
+        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(eventsPage.getFilterSearchBar()));
+        eventsPage.searchInFilter(searchString);
+    }
+
+    @Then("I see {int} {string} label")
+    public void iSeeLabel_numTypeLabel(int count, String type) {
+        Assert.assertEquals(count, eventsPage.getLabelCount(type));
+    }
+
     @And("I click the Location filter")
     public void iClickTheLocationFilter() { eventsPage.clickLocationFilter();}
 
+    @Then("I select each location filter")
+    public void iSelectEachLocationFilter() {
+        eventsPage.checkEachBox_Location();
+    }
 
     @When("I click on {string} navigation")
     public void iClickOnNavigation(String pageName) {
@@ -101,50 +114,20 @@ public class StepDefinitions {
         Assert.assertTrue(webDriverFactory.getInstance().getPageSource().contains(eventsPage.getNavigationPageURL(pageName)));
     }
 
-    @Given("the speakers portal is opened")
-    public void theSpeakersPortalIsOpened() {
-        webDriverFactory.getInstance().get("https://wearecommunity.io/speakers");
+    @When("I click on More Filters")
+    public void iClickOnMoreFilters() {
+        eventsPage.clickMoreFilter();
     }
 
-    @When("I click the speakers search bar")
-    public void iClickTheSpeakersSearchBar() {
-        speakersPage.clickSpeakerSearchBar();
+    @And("I click the Speaker filter")
+    public void iClickTheSpeakerFilter() {
+        eventsPage.clickSpeakerFilter();
     }
 
-    @And("I type {string} in speakers search")
-    public void iTypeInSpeakersSearch(String str) {
-        speakersPage.searchFor(str);
-    }
-
-    @Then("I see {int} speaker cards")
-    public void iSeeCountSpeakerCards(int count) {
-            Assert.assertEquals(count, speakersPage.getCardcountOnPage());
-    }
-
-    @Then("I see the {string} card on Speakers Page")
-    public void iSeeTheCardOnSpeakersPage(String title) {
-        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
-                .until(ExpectedConditions.textToBePresentInElement(speakersPage.getCard(), title));
-    }
-
-    @When("I click the tags search Button")
-    public void iClickTheTagsSearchButton() {
-        speakersPage.clickTagsButton();
-    }
-
-    @Then("I click into the tags search Bar")
-    public void iClickIntoTheTagsSearchBar() {
-        speakersPage.clickTagsSearchBar();
-    }
-
-    @And("I type {string} in tags search")
-    public void iTypeInTagsSearch(String str) {
-        speakersPage.searchForTag(str);
-    }
-
-    @Then("I see the {string} label on Speakers Page")
-    public void iSeeTheLabelOnSpeakersPage(String str) {
-        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
-                .until(ExpectedConditions.textToBePresentInElement(speakersPage.getLabel(), str));
+    @And("I select each Speaker filter")
+    public void iSelectEachSpeakerFilter() {
+        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(eventsPage.getFilterSearchBar()));
+        eventsPage.clickSpeakerFilter();
     }
 }

@@ -13,10 +13,10 @@ public class EventsPage extends CommonPageObject {
 
     @FindBy(css = ".evnt-search-filter .evnt-text-fields")
     private WebElement searchField;
-    @FindBy(css = ".evnt-filters-heading-cell:nth-child(3) .evnt-dropdown-filter.show .evnt-filter-menu .evnt-filter-menu-search-wrapper .evnt-text-fields")
-    private WebElement locationSearchField;
+    @FindBy(css = ".evnt-dropdown-filter.show .evnt-filter-menu .evnt-filter-menu-search-wrapper .evnt-text-fields")
+    private WebElement shownFilterSearchBar;
 
-    @FindBy(css = ".evnt-dropdown-filter #filter_location")
+    @FindBy(css = "#filter_location")
     private WebElement locationFilter;
 
     @FindBy(css = ".evnt-filter-item")
@@ -47,21 +47,36 @@ public class EventsPage extends CommonPageObject {
     private WebElement loginButton;
 
     @FindBy(css = ".evnt-dropdown-filter.show .form-check label")
-    private List<WebElement> labels;
-    @FindBy(css = ".evnt-dropdown-filter.show .evnt-filter-item-collapse label")
-//    @FindBy(css = ".evnt-dropdown-filter.show .evnt-filter-sub-item label")
-    private List<WebElement> checkboxes;
+    private List<WebElement> all_Location_Label;
+
+    @FindBy(css = "[for^=\"filter_speaker_search\"]")
+    private List<WebElement> speaker_Label;
+
+    private List<WebElement> community_Label;
+
+    @FindBy(css = "label[for^=filter_location]")
+    private List<WebElement> county_Location_label;
     @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-card-wrapper")
     private WebElement card;
 
     @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-event-card")
     private List<WebElement> cards;
 
+    @FindBy(css = ".evnt-toggle-filters-button")
+    private WebElement moreFiltersButton;
+
+    @FindBy(css = "#filter_speaker")
+    private WebElement speakersFilter;
+
+    public WebElement getFilterSearchBar() {
+        return searchField;
+    }
+
     public void searchFor(String searchTerm) {
         searchField.sendKeys(searchTerm);
     }
 
-    public void searchForLocation(String searchTerm) { locationSearchField.sendKeys(searchTerm);}
+    public void searchInFilter(String searchTerm) { shownFilterSearchBar.sendKeys(searchTerm);}
 
     public int getCardcountOnPage() {
         return cards.size();
@@ -71,16 +86,29 @@ public class EventsPage extends CommonPageObject {
         return card;
     }
 
-    public int getLabelCount() {
-        return labels.size();
+    public int getLabelCount(String type) {
+        return switch (type) {
+            case "Location" -> all_Location_Label.size();
+            case "Speaker" -> speaker_Label.size();
+            case "Community" -> community_Label.size();
+            default -> 0;
+        };
     }
 
     public void clickLocationFilter() {
         locationFilter.click();
     }
 
-    public void checkEachBox() {
-        for (WebElement checkbox : checkboxes) {
+    public void clickMoreFilter() {
+        moreFiltersButton.click();
+    }
+
+    public void clickSpeakerFilter() {
+        speakersFilter.click();
+    }
+
+    public void checkEachBox_Location() {
+        for (WebElement checkbox : county_Location_label) {
             checkbox.click();
         }
     }
