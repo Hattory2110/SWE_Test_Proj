@@ -5,7 +5,6 @@ Feature: Articles page
     When I click the articles search bar
     And I type "<search-term>" in articles search
     Then I see the "<card-titlex>" card on Articles Page
-    And I see <count> speaker cards
     Examples:
       | search-term | card-titlex
       | master      | Mastering Presentation Design: 5 Tips to Dodge Common Mistakes

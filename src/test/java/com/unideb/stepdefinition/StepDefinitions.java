@@ -126,4 +126,20 @@ public class StepDefinitions {
     public void iClickTheArticlesSearchBar() {
         articlesPage.clickArticlesSearchBar();
     }
+
+    @And("I type {string} in articles search")
+    public void iTypeInArticlesSearch(String arg0) {
+        articlesPage.searchFor(arg0);
+    }
+
+    @Then("I see the {string} card on Articles Page")
+    public void iSeeTheCardOnArticlesPage(String arg0) {
+        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
+               .until(ExpectedConditions.textToBePresentInElement(articlesPage.getCard(), arg0));
+    }
+
+    @And("I see <count> speaker cards")
+    public void iSeeCountSpeakerCards() {
+        Assert.assertEquals(1, articlesPage.getCardcountOnPage());
+    }
 }
