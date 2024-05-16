@@ -7,10 +7,10 @@ Feature: Speakers page
     Then I see the "<card-titlex>" card on Speakers Page
     And I see <count> speaker cards
     Examples:
-      | search-term | card-titlex  | count   |
+      | search-term | card-titlex   | count   |
       | maxim       | Maxim Batalin | 16      |
-      | adam        | Adam Auerbach  | 16      |
-      | peter       | Pal Peter | 10      |
+      | adam        | Adam Auerbach | 16      |
+      | peter       | Pal Peter     | 10      |
   Scenario Outline: Search for tags
     Given the speakers portal is opened
     When I click the tags search Button
@@ -19,6 +19,6 @@ Feature: Speakers page
     Then I see the "<label>" label on Speakers Page
     Examples:
       | search-term | label|
-      | polish       | Polish|
-      | french        | French|
-      | english       | English|
+      | polish      | Polish  |
+      | french      | French  |
+      | english     | English |
