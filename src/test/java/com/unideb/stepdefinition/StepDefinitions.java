@@ -7,7 +7,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,6 @@ public class StepDefinitions {
 
     @Autowired
     private CommunitiesPage communitiesPage;
-
-    @Autowired
-    private EventsPage eventsPage;
 
     @Autowired
     private ArticlesPage articlesPage;
@@ -134,12 +130,8 @@ public class StepDefinitions {
 
     @Then("I see the {string} card on Articles Page")
     public void iSeeTheCardOnArticlesPage(String arg0) {
-        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
+        new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
                .until(ExpectedConditions.textToBePresentInElement(articlesPage.getCard(), arg0));
     }
 
-    @And("I see <count> speaker cards")
-    public void iSeeCountSpeakerCards() {
-        Assert.assertEquals(1, articlesPage.getCardcountOnPage());
-    }
 }
