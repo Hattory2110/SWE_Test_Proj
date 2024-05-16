@@ -22,3 +22,4 @@ Feature: Speakers page
       | polish      | Polish  |
       | french      | French  |
       | english     | English |
+      | hello       | Helmet  |
