@@ -22,9 +22,6 @@ public class Stepdefinitions_events {
     private WebDriverFactory webDriverFactory;
 
     @Autowired
-    private HomePage homePage;
-
-    @Autowired
     private EventsPage eventsPage;
 
     @And("I type {string} in search on Events Page")
