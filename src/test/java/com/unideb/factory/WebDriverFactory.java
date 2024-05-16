@@ -16,7 +16,7 @@ import java.util.Objects;
 public class  WebDriverFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger((WebDriverFactory.class));
 
-    @Value("${headless:false}")
+    @Value("${headless:true}")
     private Boolean headless;
 
     public static WebDriver webDriver;

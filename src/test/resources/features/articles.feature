@@ -6,10 +6,10 @@ Feature: Articles page
     And I type "<search-term>" in articles search
     Then I see the "<card-titlex>" card on Articles Page
     Examples:
-      | search-term | card-titlex                                                    |
-      | master      | Mastering Presentation Design: 5 Tips to Dodge Common Mistakes |
-      | poland      | A short story of Java Poland Community                         |
-      | python      | PySpark Automation with Python                                 |
+      | search-term | card-titlex
+      | master      | Mastering Presentation Design: 5 Tips to Dodge Common Mistakes
+      | poland      | A short story of Java Poland Community
+      | python      | PySpark Automation with Python
 
   Scenario Outline: Search for tags
     Given the articles portal is opened
@@ -21,6 +21,3 @@ Feature: Articles page
       | search-term | label   | count |
       | french      | French  | 0     |
       | english     | English | 77    |
-
-
-
