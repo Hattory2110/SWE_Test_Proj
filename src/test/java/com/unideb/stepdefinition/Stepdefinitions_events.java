@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,8 +96,30 @@ public class Stepdefinitions_events {
         eventsPage.clickEventFormatFilter();
     }
 
-    @And("I select {string} filter")
+    @And("I select {string} format filter")
     public void iSelectFilter(String type) {
         eventsPage.selectEventFormatCheckbox(type);
+    }
+
+    @And("I click on Event status")
+    public void iClickOnEventStatus() {
+        eventsPage.clickEventStatusFilter();
+    }
+
+    @And("I select {string} status filter")
+    public void iSelectStatusFilter(String type) {
+        eventsPage.selectEventStatusCheckbox(type);
+    }
+
+    @And("I click Language filter")
+    public void iClickLanguageFilter() {
+        eventsPage.clickEventLanguageFilter();
+    }
+
+    @And("I select {string} language")
+    public void iSelectLanguage(String language) {
+        By selector = By.cssSelector(String.format("label[data-value=\"%s\"]", language));
+        WebElement languageLabel = webDriverFactory.getInstance().findElement(selector);
+        eventsPage.selectEventLanguageFilter(languageLabel);
     }
 }

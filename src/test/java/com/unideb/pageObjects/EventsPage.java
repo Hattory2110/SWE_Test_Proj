@@ -1,8 +1,11 @@
 package com.unideb.pageObjects;
 
 import com.unideb.factory.WebDriverFactory;
+import io.cucumber.java.sl.In;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pmw.tinylog.Logger;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -64,13 +67,28 @@ public class EventsPage extends CommonPageObject {
     @FindBy(css = "[for^=filter_event_participation_format]")
     private List<WebElement> eventFormatCheckboxes;
 
+    @FindBy(css = "#filter_event_status")
+    private WebElement eventStatusFilter;
+
+    @FindBy(css = "[for^=filter_event_status]")
+    private List<WebElement> eventStatusCheckboxes;
+
+    @FindBy(css = "#filter_language")
+    private WebElement eventLanguageFilter;
+
+    @FindBy(css = "[for^=filter_language]")
+    private List<WebElement> eventLanguages;
 
 
+    @FindBy(css = ".nav-item:first-child .nav-link .evnt-tab-counter")
+    private WebElement event_UpcomingCards;
     @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-card-wrapper")
     private WebElement event_Card;
 
-    @FindBy(css = ".evnt-events-row .evnt-events-column .evnt-event-card")
+    @FindBy(css = ".evnt-tab-content .evnt-event-card")
     private List<WebElement> event_Cards;
+
+
 
 
 
@@ -86,6 +104,12 @@ public class EventsPage extends CommonPageObject {
 
     public int getCardcountOnPage() {
         return event_Cards.size();
+////        Optional<Integer> number = Optional.ofNullable(Integer.getInteger());
+//        if (event_UpcomingCards.getText().equals('3')) {
+//            return 0;
+//        } else {
+//            return 1;
+//        }
     }
 
     public WebElement getEvent_Card() {
@@ -116,6 +140,33 @@ public class EventsPage extends CommonPageObject {
 
     public void clickEventFormatFilter() {
         eventFormatFilter.click();
+    }
+
+    public void clickEventStatusFilter() {
+        eventStatusFilter.click();
+    }
+
+    public void clickEventLanguageFilter() {
+        eventLanguageFilter.click();
+    }
+
+    public void selectEventLanguageFilter(WebElement lang) {
+        var index = eventLanguages.indexOf(lang);
+        eventLanguages.get(index).click();
+    }
+
+    public void selectEventStatusCheckbox(String name) {
+        switch (name) {
+            case "Free registration is available":
+                eventStatusCheckboxes.get(0).click();
+                break;
+            case "Call for speakers is open":
+                eventStatusCheckboxes.get(1).click();
+                break;
+            case "Voting for talks is open":
+                eventStatusCheckboxes.get(2).click();
+                break;
+        }
     }
 
     public void selectEventFormatCheckbox(String name) {
@@ -178,5 +229,43 @@ public class EventsPage extends CommonPageObject {
     public String getNavigationPageURL(String key) {
         return expectedURL;
     }
+
+//    private Map<String, WebElement> languageMap = new HashMap<String, WebElement>() {{
+//        for (WebElement languageElement: eventLanguages) {
+//
+//        }
+//
+//        List<String> languages = List.of("Armenian", "Belarusian",
+//                "Bulgarian",
+//                "Chinese",
+//                "Croatian",
+//                "Czech",
+//                "English",
+//                "Georgian",
+//                "German",
+//                "Hungarian"
+//                "Italian"
+//                "Kazakh"
+//                "Latvian"
+//                "Lithuanian"
+//                "Mandarin Chinese"
+//                "Polish"
+//                "Portuguese"
+//                "Romanian"
+//                "Russian"
+//                "Serbian"
+//                "Slovak"
+//                "Spanish"
+//                "Turkish"
+//                "Ukrainian"
+//                "Uzbek"
+//                "Vietnamese");
+//
+//
+//    }
+//
+//
+//
+//    }
 }
 
