@@ -1,10 +1,7 @@
 package com.unideb.stepdefinition;
 
 import com.unideb.factory.WebDriverFactory;
-import com.unideb.pageObjects.CommunitiesPage;
-import com.unideb.pageObjects.EventsPage;
-import com.unideb.pageObjects.HomePage;
-import com.unideb.pageObjects.SpeakersPage;
+import com.unideb.pageObjects.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -33,6 +30,9 @@ public class StepDefinitions {
 
     @Autowired
     private EventsPage eventsPage;
+
+    @Autowired
+    private ArticlesPage articlesPage;
 
     @Given("the communities portal is opened")
     public void communitiesPortalOpened() {
@@ -115,5 +115,15 @@ public class StepDefinitions {
     public void iSeeTheLabelOnSpeakersPage(String str) {
         new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(1))
                 .until(ExpectedConditions.textToBePresentInElement(speakersPage.getLabel(), str));
+    }
+
+    @Given("the articles portal is opened")
+    public void theArticlesPortalIsOpened() {
+        webDriverFactory.getInstance().get("https://wearecommunity.io/articles");
+    }
+
+    @When("I click the articles search bar")
+    public void iClickTheArticlesSearchBar() {
+        articlesPage.clickArticlesSearchBar();
     }
 }
