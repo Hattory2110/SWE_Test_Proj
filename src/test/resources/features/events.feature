@@ -48,7 +48,47 @@ Feature: Events page
     And I type "<name>" in filter search
     And I select each Speaker filter
     Then I see <label_num> "<type>" label
+    And I see the "<card-title>" card on Events Page
     And I see <card_num> card on Events
     Examples:
-      |   name      | card_num |  label_num |  type    |
-      |  Nikanchuk  | 1        |  1         |  Speaker |
+      |   name      | card_num |     card-title             | label_num |  type    |
+      |  Nikanchuk  | 1        |  Spanish Speaking Events   | 1         |  Speaker |
+
+  Scenario Outline: Search for events with event format filter
+    Given the events page opened
+    When I click on More Filters
+    And I click on Event format
+    And I select "<filter_name>" format filter
+    Then I see the "<card-title>" card on Events Page
+    And I see <card_num> card on Events
+    Examples:
+      |       filter_name      | card_num |                      card-title                        |
+      | Online only            |    66    | Spanish Speaking Events                                |
+      | Offline with streaming |    4     | Primer encuentro Club de Lectura                       |
+      | Offline only           |    18    | Polish Conversation Club in Wroclaw (offline meetings) |
+
+  Scenario Outline: Search for events with language filter
+    Given the events page opened
+    When I click on More Filters
+    And I click Language filter
+    And I select "<filtered_language>" language
+    Then I see the "<card-title>" card on Events Page
+    And I see <card_num> card on Events
+    Examples:
+      |   filtered_language    | card_num |           card-title                  |
+      | Belarusian             |    1     | WBC: Board Games Wroclaw              |
+      | Hungarian              |    1     | Coolest Projects Hungary 2024. tavasz |
+      | Spanish                |    4     | Spanish Speaking Events               |
+
+  Scenario Outline: Search for events with event status filter
+    Given the events page opened
+    When I click on More Filters
+    And I click on Event status
+    And I select "<filter_name>" status filter
+    Then I see the "<card-title>" card on Events Page
+    And I see <card_num> card on Events
+    Examples:
+      |       filter_name              | card_num   |          card-title            |
+      | Free registration is available |    81      | Spanish Speaking Events        |
+      | Call for speakers is open      |    3       | AWS User Group 3city meetup #7 |
+      | Voting for talks is open       |    0       |                                |

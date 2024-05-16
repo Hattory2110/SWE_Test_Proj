@@ -1,15 +1,14 @@
 package com.unideb.stepdefinition;
 
 import com.unideb.factory.WebDriverFactory;
-import com.unideb.pageObjects.CommunitiesPage;
 import com.unideb.pageObjects.EventsPage;
 import com.unideb.pageObjects.HomePage;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,6 @@ public class Stepdefinitions_events {
     private WebDriverFactory webDriverFactory;
 
     @Autowired
-    private HomePage homePage;
-
-    @Autowired
     private EventsPage eventsPage;
 
     @And("I type {string} in search on Events Page")
@@ -35,7 +31,7 @@ public class Stepdefinitions_events {
     @Then("I see the {string} card on Events Page")
     public void iSeeTheCardEvents(String title) {
         new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
-                .until(ExpectedConditions.textToBePresentInElement(eventsPage.getCard(), title));
+                .until(ExpectedConditions.textToBePresentInElement(eventsPage.getEvent_Card(), title));
     }
 
     @Then("I see {int} card on Events")
@@ -90,5 +86,37 @@ public class Stepdefinitions_events {
         new WebDriverWait(webDriverFactory.getInstance(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(eventsPage.getFilterSearchBar()));
         eventsPage.clickSpeakerFilter();
+    }
+
+    @And("I click on Event format")
+    public void iClickOnEventFormat() {
+        eventsPage.clickEventFormatFilter();
+    }
+
+    @And("I select {string} format filter")
+    public void iSelectFilter(String type) {
+        eventsPage.selectEventFormatCheckbox(type);
+    }
+
+    @And("I click on Event status")
+    public void iClickOnEventStatus() {
+        eventsPage.clickEventStatusFilter();
+    }
+
+    @And("I select {string} status filter")
+    public void iSelectStatusFilter(String type) {
+        eventsPage.selectEventStatusCheckbox(type);
+    }
+
+    @And("I click Language filter")
+    public void iClickLanguageFilter() {
+        eventsPage.clickEventLanguageFilter();
+    }
+
+    @And("I select {string} language")
+    public void iSelectLanguage(String language) {
+        By selector = By.cssSelector(String.format("label[data-value=\"%s\"]", language));
+        WebElement languageLabel = webDriverFactory.getInstance().findElement(selector);
+        eventsPage.selectEventLanguageFilter(languageLabel);
     }
 }
